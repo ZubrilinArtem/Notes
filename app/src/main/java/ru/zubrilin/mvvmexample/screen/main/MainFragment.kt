@@ -10,6 +10,7 @@ import ru.zubrilin.mvvmexample.R
 import ru.zubrilin.mvvmexample.databinding.FragmentMainBinding
 import ru.zubrilin.mvvmexample.models.AppNote
 import ru.zubrilin.mvvmexample.utilits.APP_ACTIVITY
+import ru.zubrilin.mvvmexample.utilits.AppPreference
 
 class MainFragment : Fragment() {
 
@@ -73,6 +74,7 @@ class MainFragment : Fragment() {
         when(item.itemId){
             R.id.btn_exit -> {
                 viewModel.signOut()
+                AppPreference.setInitUser(false)
                 APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_startFragment)
             }
         }
