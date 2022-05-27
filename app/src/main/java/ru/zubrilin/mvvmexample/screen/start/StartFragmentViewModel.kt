@@ -2,6 +2,7 @@ package ru.zubrilin.mvvmexample.screen.start
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import ru.zubrilin.mvvmexample.database.firebase.AppFirebaseRepository
 import ru.zubrilin.mvvmexample.database.room.AppRoomDatabase
 import ru.zubrilin.mvvmexample.database.room.AppRoomRepository
 import ru.zubrilin.mvvmexample.utilits.REPOSITORY
@@ -20,7 +21,8 @@ class StartFragmentViewModel(application: Application): AndroidViewModel(applica
                 onSuccess()
             }
             TYPE_FIREBASE -> {
-                showToast(TYPE_FIREBASE)
+                REPOSITORY = AppFirebaseRepository()
+                REPOSITORY.connectToDatabase({onSuccess()}, { showToast(it)})
             }
         }
     }
