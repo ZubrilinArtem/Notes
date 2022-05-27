@@ -8,11 +8,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import ru.zubrilin.mvvmexample.models.AppNote
+import ru.zubrilin.mvvmexample.utilits.REF_DATABASE
 
 class AllNotesLiveData : LiveData<List<AppNote>>() {
-    private val mAuth = FirebaseAuth.getInstance()
-    private val mDatabaseReference =
-        FirebaseDatabase.getInstance().reference.child(mAuth.currentUser?.uid.toString())
+
     private val listenner = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
             value = snapshot.children.map {
@@ -27,12 +26,12 @@ class AllNotesLiveData : LiveData<List<AppNote>>() {
     }
 
     override fun onActive() {
-        mDatabaseReference.addValueEventListener(listenner)
+        REF_DATABASE.addValueEventListener(listenner)
         super.onActive()
     }
 
     override fun onInactive() {
-        mDatabaseReference.removeEventListener(listenner)
+        REF_DATABASE.removeEventListener(listenner)
         super.onInactive()
     }
 }

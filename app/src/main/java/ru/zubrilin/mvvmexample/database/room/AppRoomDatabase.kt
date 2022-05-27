@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import ru.zubrilin.mvvmexample.models.AppNote
 
-@Database(entities = [AppNote::class], version = 1)
+@Database(entities = [AppNote::class], version = 2)
 abstract class AppRoomDatabase : RoomDatabase() {
 
     abstract fun getAppRoomDao(): AppRoomDao
@@ -23,7 +23,8 @@ abstract class AppRoomDatabase : RoomDatabase() {
                     context,
                     AppRoomDatabase::class.java,
                     "database"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 database as AppRoomDatabase
             }else database as AppRoomDatabase
         }
