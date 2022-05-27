@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -38,10 +39,20 @@ android {
 
 dependencies {
 
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
     def nav_version = "2.4.2"
     def lifecycle_version = "2.5.0-rc01"
     def arch_version = "2.1.0"
     def room_version = "2.4.2"
+
+    implementation 'com.google.gms:google-services:4.3.10'
+    implementation platform('com.google.firebase:firebase-bom:30.0.2')
+
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

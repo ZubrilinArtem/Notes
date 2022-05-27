@@ -5,7 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import ru.zubrilin.mvvmexample.database.room.AppRoomDatabase
 import ru.zubrilin.mvvmexample.database.room.AppRoomRepository
 import ru.zubrilin.mvvmexample.utilits.REPOSITORY
+import ru.zubrilin.mvvmexample.utilits.TYPE_FIREBASE
 import ru.zubrilin.mvvmexample.utilits.TYPE_ROOM
+import ru.zubrilin.mvvmexample.utilits.showToast
 
 class StartFragmentViewModel(application: Application): AndroidViewModel(application) {
     private val context = application
@@ -16,6 +18,9 @@ class StartFragmentViewModel(application: Application): AndroidViewModel(applica
                 val dao = AppRoomDatabase.getInstance(context).getAppRoomDao()
                 REPOSITORY = AppRoomRepository(dao)
                 onSuccess()
+            }
+            TYPE_FIREBASE -> {
+                showToast(TYPE_FIREBASE)
             }
         }
     }
